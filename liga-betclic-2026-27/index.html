@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Liga Portugal Betclic 2026/27 — calendário, resultados em direto, marcadores, cartões e classificação.">
+  <title>Liga Betclic 2026/27</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="dev-banner" id="devBanner" hidden>
+    Sem ligação à API — a mostrar calendário base. Resultados em direto indisponíveis.
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-ball">⚽</span>
+        <div class="brand-text">
+          <h1>LIGA BETCLIC</h1>
+          <span class="brand-season">2026/27 · 9 AGO — 16 MAI</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button id="btnHoje" class="chip-btn" title="Ir para a jornada atual">📅 Hoje</button>
+        <button id="btnInstalar" class="chip-btn" hidden>⬇ Instalar</button>
+        <button id="btnTv" class="chip-btn" title="Modo TV">📺 Modo TV</button>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="jogos" role="tab">JOGOS</button>
+      <button class="tab" data-tab="classificacao" role="tab">CLASSIFICAÇÃO</button>
+      <button class="tab" data-tab="clubes" role="tab">CLUBES</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- JOGOS -->
+    <section id="tab-jogos" class="tab-panel active">
+      <div class="jornada-nav">
+        <button id="jPrev" class="jnav-btn" aria-label="Jornada anterior">‹</button>
+        <div class="jornada-scroll" id="jornadaChips"></div>
+        <button id="jNext" class="jnav-btn" aria-label="Jornada seguinte">›</button>
+      </div>
+      <div class="jornada-header" id="jornadaHeader"></div>
+      <div id="matchList" class="match-list">
+        <div class="loading">A carregar…</div>
+      </div>
+    </section>
+
+    <!-- CLASSIFICAÇÃO -->
+    <section id="tab-classificacao" class="tab-panel">
+      <div class="table-wrap">
+        <table class="standings" id="standingsTable">
+          <thead>
+            <tr>
+              <th class="pos">#</th>
+              <th class="team-col">Equipa</th>
+              <th>P</th><th>J</th><th>V</th><th>E</th><th>D</th>
+              <th class="wide">GM</th><th class="wide">GS</th><th>DG</th>
+            </tr>
+          </thead>
+          <tbody id="standingsBody">
+            <tr><td colspan="10" class="loading">A carregar…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span><i class="dot dot-ucl"></i> Liga dos Campeões</span>
+        <span><i class="dot dot-uel"></i> Liga Europa</span>
+        <span><i class="dot dot-uecl"></i> Liga Conferência</span>
+        <span><i class="dot dot-po"></i> Play-off manutenção</span>
+        <span><i class="dot dot-desc"></i> Descida</span>
+      </div>
+      <div class="scorers-block">
+        <h2>MELHORES MARCADORES</h2>
+        <ol id="scorersList" class="scorers"><li class="loading">—</li></ol>
+      </div>
+    </section>
+
+    <!-- CLUBES -->
+    <section id="tab-clubes" class="tab-panel">
+      <div id="clubGrid" class="club-grid"></div>
+      <div id="clubDetail" class="club-detail" hidden>
+        <button id="clubBack" class="chip-btn">‹ Todos os clubes</button>
+        <h2 id="clubName"></h2>
+        <div id="clubMatches" class="match-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODO TV -->
+  <div id="tvMode" class="tv-mode" hidden>
+    <button id="tvClose" class="tv-close" aria-label="Fechar">✕</button>
+    <div class="tv-clock" id="tvClock"></div>
+    <div class="tv-content" id="tvContent"></div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <footer class="footer">
+    <p>Dados: Liga Portugal / football-data.org · Horas de Portugal continental · Datas e horas sujeitas a confirmação oficial.</p>
+    <p class="credit">app desenvolvida por <a href="https://caixamagica.pt" target="_blank" rel="noopener">Caixa Mágica <strong>Software</strong></a></p>
+    <p>🌐 <a href="https://caixamagica.pt" target="_blank" rel="noopener">caixamagica.pt</a> · ✉ comercial@caixamagica.pt · ☎ +351 217 921 260</p>
+    <p>© 2026 Caixa Mágica Software</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

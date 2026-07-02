@@ -1,0 +1,14 @@
+{
+  "_ajuda": {
+    "descricao": "Ficheiro de acertos manuais. Edita e faz redeploy (ou commit se tiveres CI). Tudo aqui sobrepõe-se aos dados da API e do seed.",
+    "tvDefaults": "Canal por omissão consoante a equipa da casa (id da equipa -> canal).",
+    "matches": "Lista de acertos por jogo. Identifica o jogo por jornada + home + away (ids do seed.json). Campos possíveis: date (YYYY-MM-DD), time (HH:MM, hora de Portugal continental), tv, confirmed (true quando data/hora são oficiais), status ('POSTPONED' para adiado), nota (texto livre mostrado no cartão).",
+    "exemplo": { "j": 1, "home": "EAM", "away": "SCP", "date": "2026-08-09", "time": "20:30", "tv": "Sport TV1", "confirmed": true }
+  },
+  "tvDefaults": {
+    "SLB": "BTV",
+    "*": "Sport TV"
+  },
+  "matches": [
+  ]
+}
