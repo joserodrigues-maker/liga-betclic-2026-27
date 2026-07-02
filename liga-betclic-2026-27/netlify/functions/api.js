@@ -20,6 +20,26 @@ async function fd(path) {
   return r.json();
 }
 
+/* A época 2026/27 pode ainda não existir na API (404). Nesse caso tenta a época
+   corrente e só a devolve se já for a 2026/27; senão devolve payload vazio
+   para a app continuar com o calendário base sem erro. */
+async function fdSeasonFallback(resPath, extraQs) {
+  const qs = extraQs ? `&${extraQs}` : '';
+  try {
+    return await fd(`${resPath}?season=${SEASON}${qs}`);
+  } catch (e) {
+    if (e.status !== 404 && e.status !== 400) throw e;
+    const data = await fd(`${resPath}${extraQs ? `?${extraQs}` : ''}`);
+    const start =
+      (data.season && data.season.startDate) ||
+      (data.filters && data.filters.season) ||
+      (Array.isArray(data.matches) && data.matches[0] && data.matches[0].season && data.matches[0].season.startDate) ||
+      '';
+    if (String(start).startsWith(SEASON)) return data;
+    return { seasonAvailable: false, matches: [], standings: [], scorers: [] };
+  }
+}
+
 exports.handler = async (event) => {
   const headers = {
     'Content-Type': 'application/json; charset=utf-8',
@@ -36,38 +56,42 @@ exports.handler = async (event) => {
   const [resource] = rawPath.split('&');
   const id = (event.queryStringParameters || {}).id || (rawPath.match(/id=(\d+)/) || [])[1];
 
-  let upstream, ttl;
+  let ttl, fetcher, cacheKey;
   switch (resource) {
     case 'matches':
-      upstream = `/competitions/${COMP}/matches?season=${SEASON}`;
       ttl = TTL.matches;
+      cacheKey = 'matches';
+      fetcher = () => fdSeasonFallback(`/competitions/${COMP}/matches`);
       break;
     case 'standings':
-      upstream = `/competitions/${COMP}/standings?season=${SEASON}`;
       ttl = TTL.standings;
+      cacheKey = 'standings';
+      fetcher = () => fdSeasonFallback(`/competitions/${COMP}/standings`);
       break;
     case 'scorers':
-      upstream = `/competitions/${COMP}/scorers?season=${SEASON}&limit=15`;
       ttl = TTL.scorers;
+      cacheKey = 'scorers';
+      fetcher = () => fdSeasonFallback(`/competitions/${COMP}/scorers`, 'limit=15');
       break;
     case 'match':
       if (!id) return { statusCode: 400, headers, body: JSON.stringify({ error: 'falta id' }) };
-      upstream = `/matches/${id}`;
       ttl = TTL.match;
+      cacheKey = `match-${id}`;
+      fetcher = () => fd(`/matches/${id}`);
       break;
     default:
       return { statusCode: 404, headers, body: JSON.stringify({ error: `recurso desconhecido: ${resource}` }) };
   }
 
-  const hit = cache.get(upstream);
+  const hit = cache.get(cacheKey);
   if (hit && Date.now() - hit.t < ttl * 1000) {
     return { statusCode: 200, headers, body: hit.body };
   }
 
   try {
-    const data = await fd(upstream);
+    const data = await fetcher();
     const body = JSON.stringify(data);
-    cache.set(upstream, { t: Date.now(), body });
+    cache.set(cacheKey, { t: Date.now(), body });
     return { statusCode: 200, headers, body };
   } catch (e) {
     // se a API falhar mas houver cache antiga, devolve-a
