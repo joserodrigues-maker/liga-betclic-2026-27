@@ -1,98 +1,1682 @@
 {
-  "season": "2026/27",
-  "competition": "Liga Portugal Betclic",
-  "teams": [
-    { "id": "SCP", "name": "Sporting CP", "short": "Sporting", "color": "#008056" },
-    { "id": "SLB", "name": "SL Benfica", "short": "Benfica", "color": "#E30613" },
-    { "id": "FCP", "name": "FC Porto", "short": "FC Porto", "color": "#0046A8" },
-    { "id": "BRA", "name": "SC Braga", "short": "SC Braga", "color": "#D02A31" },
-    { "id": "VSC", "name": "Vitória SC", "short": "Vitória SC", "color": "#4A4A4A" },
-    { "id": "RAV", "name": "Rio Ave FC", "short": "Rio Ave", "color": "#00794F" },
-    { "id": "FAM", "name": "FC Famalicão", "short": "Famalicão", "color": "#1B4A9C" },
-    { "id": "ARO", "name": "FC Arouca", "short": "Arouca", "color": "#E8B909" },
-    { "id": "NAC", "name": "CD Nacional", "short": "Nacional", "color": "#3B3B3B" },
-    { "id": "EAM", "name": "CF Estrela da Amadora", "short": "E. Amadora", "color": "#D31145" },
-    { "id": "ALV", "name": "FC Alverca", "short": "Alverca", "color": "#C8102E" },
-    { "id": "CPA", "name": "Casa Pia AC", "short": "Casa Pia", "color": "#2B2B2B" },
-    { "id": "MOR", "name": "Moreirense FC", "short": "Moreirense", "color": "#0E7C3A" },
-    { "id": "EST", "name": "GD Estoril Praia", "short": "Estoril", "color": "#D8B400" },
-    { "id": "GVF", "name": "Gil Vicente FC", "short": "Gil Vicente", "color": "#C4122E" },
-    { "id": "SCL", "name": "CD Santa Clara", "short": "Santa Clara", "color": "#E4001C" },
-    { "id": "MAR", "name": "CS Marítimo", "short": "Marítimo", "color": "#007B3A" },
-    { "id": "ACV", "name": "Académico de Viseu FC", "short": "Ac. Viseu", "color": "#1E1E1E" }
-  ],
-  "jornadas": {
-    "1": "2026-08-09", "2": "2026-08-16", "3": "2026-08-23", "4": "2026-08-30",
-    "5": "2026-09-06", "6": "2026-09-13", "7": "2026-09-20", "8": "2026-10-11",
-    "9": "2026-10-25", "10": "2026-11-01", "11": "2026-11-08", "12": "2026-11-29",
-    "13": "2026-12-06", "14": "2026-12-13", "15": "2026-12-20", "16": "2026-12-27",
-    "17": "2027-01-10", "18": "2027-01-17", "19": "2027-01-24", "20": "2027-01-31",
-    "21": "2027-02-07", "22": "2027-02-14", "23": "2027-02-21", "24": "2027-02-28",
-    "25": "2027-03-07", "26": "2027-03-14", "27": "2027-03-21", "28": "2027-04-04",
-    "29": "2027-04-11", "30": "2027-04-18", "31": "2027-04-25", "32": "2027-05-02",
-    "33": "2027-05-09", "34": "2027-05-16"
+ "season": "2026/27",
+ "competition": "Liga Portugal Betclic",
+ "teams": [
+  {
+   "id": "SCP",
+   "name": "Sporting CP",
+   "short": "Sporting",
+   "color": "#008056"
   },
-  "matches": [
-    { "j": 1, "home": "EAM", "away": "SCP" },
-    { "j": 1, "home": "EST", "away": "FAM" },
-    { "j": 1, "home": "GVF", "away": "RAV" },
-    { "j": 1, "home": "MAR", "away": "CPA" },
-    { "j": 1, "home": "MOR", "away": "BRA" },
-    { "j": 1, "home": "FCP", "away": "ALV" },
-    { "j": 1, "home": "SCL", "away": "NAC" },
-    { "j": 1, "home": "SLB", "away": "ACV" },
-    { "j": 1, "home": "VSC", "away": "ARO" },
-
-    { "j": 2, "home": "SCP", "away": "VSC" },
-    { "j": 3, "home": "SCP", "away": "ALV" },
-    { "j": 4, "home": "RAV", "away": "SCP" },
-    { "j": 4, "home": "BRA", "away": "VSC" },
-    { "j": 5, "home": "SCP", "away": "NAC" },
-    { "j": 6, "home": "FAM", "away": "SCP" },
-    { "j": 7, "home": "SCP", "away": "ARO" },
-    { "j": 7, "home": "FCP", "away": "SLB" },
-    { "j": 8, "home": "BRA", "away": "SCP" },
-    { "j": 9, "home": "SCP", "away": "ACV" },
-    { "j": 10, "home": "CPA", "away": "SCP" },
-    { "j": 11, "home": "SCP", "away": "MOR" },
-    { "j": 12, "home": "FCP", "away": "SCP" },
-    { "j": 12, "home": "MAR", "away": "NAC" },
-    { "j": 13, "home": "SCP", "away": "MAR" },
-    { "j": 14, "home": "GVF", "away": "SCP" },
-    { "j": 15, "home": "SCP", "away": "EST" },
-    { "j": 15, "home": "SLB", "away": "BRA" },
-    { "j": 16, "home": "SLB", "away": "SCP" },
-    { "j": 17, "home": "SCP", "away": "SCL" },
-    { "j": 17, "home": "FCP", "away": "BRA" },
-    { "j": 18, "home": "SCP", "away": "EAM" },
-    { "j": 19, "home": "VSC", "away": "SCP" },
-    { "j": 20, "home": "ALV", "away": "SCP" },
-    { "j": 21, "home": "SCP", "away": "RAV" },
-    { "j": 21, "home": "VSC", "away": "BRA" },
-    { "j": 22, "home": "NAC", "away": "SCP" },
-    { "j": 23, "home": "SCP", "away": "FAM" },
-    { "j": 24, "home": "ARO", "away": "SCP" },
-    { "j": 24, "home": "SLB", "away": "FCP" },
-    { "j": 25, "home": "SCP", "away": "BRA" },
-    { "j": 26, "home": "ACV", "away": "SCP" },
-    { "j": 27, "home": "SCP", "away": "CPA" },
-    { "j": 28, "home": "MOR", "away": "SCP" },
-    { "j": 29, "home": "SCP", "away": "FCP" },
-    { "j": 29, "home": "NAC", "away": "MAR" },
-    { "j": 30, "home": "MAR", "away": "SCP" },
-    { "j": 31, "home": "SCP", "away": "GVF" },
-    { "j": 31, "home": "BRA", "away": "SLB" },
-    { "j": 32, "home": "EST", "away": "SCP" },
-    { "j": 33, "home": "SCP", "away": "SLB" },
-
-    { "j": 34, "home": "ACV", "away": "CPA" },
-    { "j": 34, "home": "ALV", "away": "MAR" },
-    { "j": 34, "home": "EAM", "away": "EST" },
-    { "j": 34, "home": "ARO", "away": "SLB" },
-    { "j": 34, "home": "BRA", "away": "FCP" },
-    { "j": 34, "home": "FAM", "away": "VSC" },
-    { "j": 34, "home": "NAC", "away": "GVF" },
-    { "j": 34, "home": "RAV", "away": "MOR" },
-    { "j": 34, "home": "SCL", "away": "SCP" }
-  ]
+  {
+   "id": "SLB",
+   "name": "SL Benfica",
+   "short": "Benfica",
+   "color": "#E30613"
+  },
+  {
+   "id": "FCP",
+   "name": "FC Porto",
+   "short": "FC Porto",
+   "color": "#0046A8"
+  },
+  {
+   "id": "BRA",
+   "name": "SC Braga",
+   "short": "SC Braga",
+   "color": "#D02A31"
+  },
+  {
+   "id": "VSC",
+   "name": "Vitória SC",
+   "short": "Vitória SC",
+   "color": "#4A4A4A"
+  },
+  {
+   "id": "RAV",
+   "name": "Rio Ave FC",
+   "short": "Rio Ave",
+   "color": "#00794F"
+  },
+  {
+   "id": "FAM",
+   "name": "FC Famalicão",
+   "short": "Famalicão",
+   "color": "#1B4A9C"
+  },
+  {
+   "id": "ARO",
+   "name": "FC Arouca",
+   "short": "Arouca",
+   "color": "#E8B909"
+  },
+  {
+   "id": "NAC",
+   "name": "CD Nacional",
+   "short": "Nacional",
+   "color": "#3B3B3B"
+  },
+  {
+   "id": "EAM",
+   "name": "CF Estrela da Amadora",
+   "short": "E. Amadora",
+   "color": "#D31145"
+  },
+  {
+   "id": "ALV",
+   "name": "FC Alverca",
+   "short": "Alverca",
+   "color": "#C8102E"
+  },
+  {
+   "id": "CPA",
+   "name": "Casa Pia AC",
+   "short": "Casa Pia",
+   "color": "#2B2B2B"
+  },
+  {
+   "id": "MOR",
+   "name": "Moreirense FC",
+   "short": "Moreirense",
+   "color": "#0E7C3A"
+  },
+  {
+   "id": "EST",
+   "name": "GD Estoril Praia",
+   "short": "Estoril",
+   "color": "#D8B400"
+  },
+  {
+   "id": "GVF",
+   "name": "Gil Vicente FC",
+   "short": "Gil Vicente",
+   "color": "#C4122E"
+  },
+  {
+   "id": "SCL",
+   "name": "CD Santa Clara",
+   "short": "Santa Clara",
+   "color": "#E4001C"
+  },
+  {
+   "id": "MAR",
+   "name": "CS Marítimo",
+   "short": "Marítimo",
+   "color": "#007B3A"
+  },
+  {
+   "id": "ACV",
+   "name": "Académico de Viseu FC",
+   "short": "Ac. Viseu",
+   "color": "#1E1E1E"
+  }
+ ],
+ "jornadas": {
+  "1": "2026-08-09",
+  "2": "2026-08-16",
+  "3": "2026-08-23",
+  "4": "2026-08-30",
+  "5": "2026-09-06",
+  "6": "2026-09-13",
+  "7": "2026-09-20",
+  "8": "2026-10-11",
+  "9": "2026-10-25",
+  "10": "2026-11-01",
+  "11": "2026-11-08",
+  "12": "2026-11-29",
+  "13": "2026-12-06",
+  "14": "2026-12-13",
+  "15": "2026-12-20",
+  "16": "2026-12-27",
+  "17": "2027-01-10",
+  "18": "2027-01-17",
+  "19": "2027-01-24",
+  "20": "2027-01-31",
+  "21": "2027-02-07",
+  "22": "2027-02-14",
+  "23": "2027-02-21",
+  "24": "2027-02-28",
+  "25": "2027-03-07",
+  "26": "2027-03-14",
+  "27": "2027-03-21",
+  "28": "2027-04-04",
+  "29": "2027-04-11",
+  "30": "2027-04-18",
+  "31": "2027-04-25",
+  "32": "2027-05-02",
+  "33": "2027-05-09",
+  "34": "2027-05-16"
+ },
+ "matches": [
+  {
+   "j": 1,
+   "home": "EAM",
+   "away": "SCP"
+  },
+  {
+   "j": 1,
+   "home": "EST",
+   "away": "FAM"
+  },
+  {
+   "j": 1,
+   "home": "GVF",
+   "away": "RAV"
+  },
+  {
+   "j": 1,
+   "home": "MAR",
+   "away": "CPA"
+  },
+  {
+   "j": 1,
+   "home": "MOR",
+   "away": "BRA"
+  },
+  {
+   "j": 1,
+   "home": "FCP",
+   "away": "ALV"
+  },
+  {
+   "j": 1,
+   "home": "SCL",
+   "away": "NAC"
+  },
+  {
+   "j": 1,
+   "home": "SLB",
+   "away": "ACV"
+  },
+  {
+   "j": 1,
+   "home": "VSC",
+   "away": "ARO"
+  },
+  {
+   "j": 18,
+   "home": "SCP",
+   "away": "EAM"
+  },
+  {
+   "j": 18,
+   "home": "FAM",
+   "away": "EST"
+  },
+  {
+   "j": 18,
+   "home": "RAV",
+   "away": "GVF"
+  },
+  {
+   "j": 18,
+   "home": "CPA",
+   "away": "MAR"
+  },
+  {
+   "j": 18,
+   "home": "BRA",
+   "away": "MOR"
+  },
+  {
+   "j": 18,
+   "home": "ALV",
+   "away": "FCP"
+  },
+  {
+   "j": 18,
+   "home": "NAC",
+   "away": "SCL"
+  },
+  {
+   "j": 18,
+   "home": "ACV",
+   "away": "SLB"
+  },
+  {
+   "j": 18,
+   "home": "ARO",
+   "away": "VSC"
+  },
+  {
+   "j": 2,
+   "home": "ACV",
+   "away": "SCL"
+  },
+  {
+   "j": 2,
+   "home": "ALV",
+   "away": "EAM"
+  },
+  {
+   "j": 2,
+   "home": "ARO",
+   "away": "MOR"
+  },
+  {
+   "j": 2,
+   "home": "BRA",
+   "away": "GVF"
+  },
+  {
+   "j": 2,
+   "home": "CPA",
+   "away": "SLB"
+  },
+  {
+   "j": 2,
+   "home": "FAM",
+   "away": "MAR"
+  },
+  {
+   "j": 2,
+   "home": "NAC",
+   "away": "EST"
+  },
+  {
+   "j": 2,
+   "home": "RAV",
+   "away": "FCP"
+  },
+  {
+   "j": 2,
+   "home": "SCP",
+   "away": "VSC"
+  },
+  {
+   "j": 19,
+   "home": "SCL",
+   "away": "ACV"
+  },
+  {
+   "j": 19,
+   "home": "EAM",
+   "away": "ALV"
+  },
+  {
+   "j": 19,
+   "home": "MOR",
+   "away": "ARO"
+  },
+  {
+   "j": 19,
+   "home": "GVF",
+   "away": "BRA"
+  },
+  {
+   "j": 19,
+   "home": "SLB",
+   "away": "CPA"
+  },
+  {
+   "j": 19,
+   "home": "MAR",
+   "away": "FAM"
+  },
+  {
+   "j": 19,
+   "home": "EST",
+   "away": "NAC"
+  },
+  {
+   "j": 19,
+   "home": "FCP",
+   "away": "RAV"
+  },
+  {
+   "j": 19,
+   "home": "VSC",
+   "away": "SCP"
+  },
+  {
+   "j": 3,
+   "home": "EAM",
+   "away": "BRA"
+  },
+  {
+   "j": 3,
+   "home": "EST",
+   "away": "RAV"
+  },
+  {
+   "j": 3,
+   "home": "GVF",
+   "away": "CPA"
+  },
+  {
+   "j": 3,
+   "home": "MAR",
+   "away": "ACV"
+  },
+  {
+   "j": 3,
+   "home": "MOR",
+   "away": "SLB"
+  },
+  {
+   "j": 3,
+   "home": "FCP",
+   "away": "ARO"
+  },
+  {
+   "j": 3,
+   "home": "SCL",
+   "away": "FAM"
+  },
+  {
+   "j": 3,
+   "home": "SCP",
+   "away": "ALV"
+  },
+  {
+   "j": 3,
+   "home": "VSC",
+   "away": "NAC"
+  },
+  {
+   "j": 20,
+   "home": "BRA",
+   "away": "EAM"
+  },
+  {
+   "j": 20,
+   "home": "RAV",
+   "away": "EST"
+  },
+  {
+   "j": 20,
+   "home": "CPA",
+   "away": "GVF"
+  },
+  {
+   "j": 20,
+   "home": "ACV",
+   "away": "MAR"
+  },
+  {
+   "j": 20,
+   "home": "SLB",
+   "away": "MOR"
+  },
+  {
+   "j": 20,
+   "home": "ARO",
+   "away": "FCP"
+  },
+  {
+   "j": 20,
+   "home": "FAM",
+   "away": "SCL"
+  },
+  {
+   "j": 20,
+   "home": "ALV",
+   "away": "SCP"
+  },
+  {
+   "j": 20,
+   "home": "NAC",
+   "away": "VSC"
+  },
+  {
+   "j": 4,
+   "home": "ACV",
+   "away": "FCP"
+  },
+  {
+   "j": 4,
+   "home": "ALV",
+   "away": "SCL"
+  },
+  {
+   "j": 4,
+   "home": "ARO",
+   "away": "MAR"
+  },
+  {
+   "j": 4,
+   "home": "BRA",
+   "away": "VSC"
+  },
+  {
+   "j": 4,
+   "home": "CPA",
+   "away": "MOR"
+  },
+  {
+   "j": 4,
+   "home": "FAM",
+   "away": "GVF"
+  },
+  {
+   "j": 4,
+   "home": "NAC",
+   "away": "EAM"
+  },
+  {
+   "j": 4,
+   "home": "RAV",
+   "away": "SCP"
+  },
+  {
+   "j": 4,
+   "home": "SLB",
+   "away": "EST"
+  },
+  {
+   "j": 21,
+   "home": "FCP",
+   "away": "ACV"
+  },
+  {
+   "j": 21,
+   "home": "SCL",
+   "away": "ALV"
+  },
+  {
+   "j": 21,
+   "home": "MAR",
+   "away": "ARO"
+  },
+  {
+   "j": 21,
+   "home": "VSC",
+   "away": "BRA"
+  },
+  {
+   "j": 21,
+   "home": "MOR",
+   "away": "CPA"
+  },
+  {
+   "j": 21,
+   "home": "GVF",
+   "away": "FAM"
+  },
+  {
+   "j": 21,
+   "home": "EAM",
+   "away": "NAC"
+  },
+  {
+   "j": 21,
+   "home": "SCP",
+   "away": "RAV"
+  },
+  {
+   "j": 21,
+   "home": "EST",
+   "away": "SLB"
+  },
+  {
+   "j": 5,
+   "home": "ALV",
+   "away": "BRA"
+  },
+  {
+   "j": 5,
+   "home": "EAM",
+   "away": "FAM"
+  },
+  {
+   "j": 5,
+   "home": "EST",
+   "away": "ARO"
+  },
+  {
+   "j": 5,
+   "home": "GVF",
+   "away": "ACV"
+  },
+  {
+   "j": 5,
+   "home": "MAR",
+   "away": "SLB"
+  },
+  {
+   "j": 5,
+   "home": "FCP",
+   "away": "MOR"
+  },
+  {
+   "j": 5,
+   "home": "SCL",
+   "away": "RAV"
+  },
+  {
+   "j": 5,
+   "home": "SCP",
+   "away": "NAC"
+  },
+  {
+   "j": 5,
+   "home": "VSC",
+   "away": "CPA"
+  },
+  {
+   "j": 22,
+   "home": "BRA",
+   "away": "ALV"
+  },
+  {
+   "j": 22,
+   "home": "FAM",
+   "away": "EAM"
+  },
+  {
+   "j": 22,
+   "home": "ARO",
+   "away": "EST"
+  },
+  {
+   "j": 22,
+   "home": "ACV",
+   "away": "GVF"
+  },
+  {
+   "j": 22,
+   "home": "SLB",
+   "away": "MAR"
+  },
+  {
+   "j": 22,
+   "home": "MOR",
+   "away": "FCP"
+  },
+  {
+   "j": 22,
+   "home": "RAV",
+   "away": "SCL"
+  },
+  {
+   "j": 22,
+   "home": "NAC",
+   "away": "SCP"
+  },
+  {
+   "j": 22,
+   "home": "CPA",
+   "away": "VSC"
+  },
+  {
+   "j": 6,
+   "home": "ACV",
+   "away": "VSC"
+  },
+  {
+   "j": 6,
+   "home": "ARO",
+   "away": "SCL"
+  },
+  {
+   "j": 6,
+   "home": "BRA",
+   "away": "EST"
+  },
+  {
+   "j": 6,
+   "home": "CPA",
+   "away": "FCP"
+  },
+  {
+   "j": 6,
+   "home": "FAM",
+   "away": "SCP"
+  },
+  {
+   "j": 6,
+   "home": "MOR",
+   "away": "MAR"
+  },
+  {
+   "j": 6,
+   "home": "NAC",
+   "away": "ALV"
+  },
+  {
+   "j": 6,
+   "home": "RAV",
+   "away": "EAM"
+  },
+  {
+   "j": 6,
+   "home": "SLB",
+   "away": "GVF"
+  },
+  {
+   "j": 23,
+   "home": "VSC",
+   "away": "ACV"
+  },
+  {
+   "j": 23,
+   "home": "SCL",
+   "away": "ARO"
+  },
+  {
+   "j": 23,
+   "home": "EST",
+   "away": "BRA"
+  },
+  {
+   "j": 23,
+   "home": "FCP",
+   "away": "CPA"
+  },
+  {
+   "j": 23,
+   "home": "SCP",
+   "away": "FAM"
+  },
+  {
+   "j": 23,
+   "home": "MAR",
+   "away": "MOR"
+  },
+  {
+   "j": 23,
+   "home": "ALV",
+   "away": "NAC"
+  },
+  {
+   "j": 23,
+   "home": "EAM",
+   "away": "RAV"
+  },
+  {
+   "j": 23,
+   "home": "GVF",
+   "away": "SLB"
+  },
+  {
+   "j": 7,
+   "home": "ALV",
+   "away": "RAV"
+  },
+  {
+   "j": 7,
+   "home": "EAM",
+   "away": "ACV"
+  },
+  {
+   "j": 7,
+   "home": "EST",
+   "away": "CPA"
+  },
+  {
+   "j": 7,
+   "home": "GVF",
+   "away": "MAR"
+  },
+  {
+   "j": 7,
+   "home": "NAC",
+   "away": "FAM"
+  },
+  {
+   "j": 7,
+   "home": "FCP",
+   "away": "SLB"
+  },
+  {
+   "j": 7,
+   "home": "SCL",
+   "away": "BRA"
+  },
+  {
+   "j": 7,
+   "home": "SCP",
+   "away": "ARO"
+  },
+  {
+   "j": 7,
+   "home": "VSC",
+   "away": "MOR"
+  },
+  {
+   "j": 24,
+   "home": "RAV",
+   "away": "ALV"
+  },
+  {
+   "j": 24,
+   "home": "ACV",
+   "away": "EAM"
+  },
+  {
+   "j": 24,
+   "home": "CPA",
+   "away": "EST"
+  },
+  {
+   "j": 24,
+   "home": "MAR",
+   "away": "GVF"
+  },
+  {
+   "j": 24,
+   "home": "FAM",
+   "away": "NAC"
+  },
+  {
+   "j": 24,
+   "home": "SLB",
+   "away": "FCP"
+  },
+  {
+   "j": 24,
+   "home": "BRA",
+   "away": "SCL"
+  },
+  {
+   "j": 24,
+   "home": "ARO",
+   "away": "SCP"
+  },
+  {
+   "j": 24,
+   "home": "MOR",
+   "away": "VSC"
+  },
+  {
+   "j": 8,
+   "home": "ACV",
+   "away": "EST"
+  },
+  {
+   "j": 8,
+   "home": "ARO",
+   "away": "EAM"
+  },
+  {
+   "j": 8,
+   "home": "BRA",
+   "away": "SCP"
+  },
+  {
+   "j": 8,
+   "home": "CPA",
+   "away": "SCL"
+  },
+  {
+   "j": 8,
+   "home": "FAM",
+   "away": "ALV"
+  },
+  {
+   "j": 8,
+   "home": "MAR",
+   "away": "FCP"
+  },
+  {
+   "j": 8,
+   "home": "MOR",
+   "away": "GVF"
+  },
+  {
+   "j": 8,
+   "home": "RAV",
+   "away": "NAC"
+  },
+  {
+   "j": 8,
+   "home": "SLB",
+   "away": "VSC"
+  },
+  {
+   "j": 25,
+   "home": "EST",
+   "away": "ACV"
+  },
+  {
+   "j": 25,
+   "home": "EAM",
+   "away": "ARO"
+  },
+  {
+   "j": 25,
+   "home": "SCP",
+   "away": "BRA"
+  },
+  {
+   "j": 25,
+   "home": "SCL",
+   "away": "CPA"
+  },
+  {
+   "j": 25,
+   "home": "ALV",
+   "away": "FAM"
+  },
+  {
+   "j": 25,
+   "home": "FCP",
+   "away": "MAR"
+  },
+  {
+   "j": 25,
+   "home": "GVF",
+   "away": "MOR"
+  },
+  {
+   "j": 25,
+   "home": "NAC",
+   "away": "RAV"
+  },
+  {
+   "j": 25,
+   "home": "VSC",
+   "away": "SLB"
+  },
+  {
+   "j": 9,
+   "home": "ALV",
+   "away": "ARO"
+  },
+  {
+   "j": 9,
+   "home": "EAM",
+   "away": "CPA"
+  },
+  {
+   "j": 9,
+   "home": "EST",
+   "away": "MOR"
+  },
+  {
+   "j": 9,
+   "home": "GVF",
+   "away": "FCP"
+  },
+  {
+   "j": 9,
+   "home": "NAC",
+   "away": "BRA"
+  },
+  {
+   "j": 9,
+   "home": "RAV",
+   "away": "FAM"
+  },
+  {
+   "j": 9,
+   "home": "SCL",
+   "away": "SLB"
+  },
+  {
+   "j": 9,
+   "home": "SCP",
+   "away": "ACV"
+  },
+  {
+   "j": 9,
+   "home": "VSC",
+   "away": "MAR"
+  },
+  {
+   "j": 26,
+   "home": "ARO",
+   "away": "ALV"
+  },
+  {
+   "j": 26,
+   "home": "CPA",
+   "away": "EAM"
+  },
+  {
+   "j": 26,
+   "home": "MOR",
+   "away": "EST"
+  },
+  {
+   "j": 26,
+   "home": "FCP",
+   "away": "GVF"
+  },
+  {
+   "j": 26,
+   "home": "BRA",
+   "away": "NAC"
+  },
+  {
+   "j": 26,
+   "home": "FAM",
+   "away": "RAV"
+  },
+  {
+   "j": 26,
+   "home": "SLB",
+   "away": "SCL"
+  },
+  {
+   "j": 26,
+   "home": "ACV",
+   "away": "SCP"
+  },
+  {
+   "j": 26,
+   "home": "MAR",
+   "away": "VSC"
+  },
+  {
+   "j": 10,
+   "home": "ACV",
+   "away": "RAV"
+  },
+  {
+   "j": 10,
+   "home": "ARO",
+   "away": "NAC"
+  },
+  {
+   "j": 10,
+   "home": "BRA",
+   "away": "FAM"
+  },
+  {
+   "j": 10,
+   "home": "CPA",
+   "away": "SCP"
+  },
+  {
+   "j": 10,
+   "home": "GVF",
+   "away": "VSC"
+  },
+  {
+   "j": 10,
+   "home": "MAR",
+   "away": "SCL"
+  },
+  {
+   "j": 10,
+   "home": "MOR",
+   "away": "EAM"
+  },
+  {
+   "j": 10,
+   "home": "FCP",
+   "away": "EST"
+  },
+  {
+   "j": 10,
+   "home": "SLB",
+   "away": "ALV"
+  },
+  {
+   "j": 27,
+   "home": "RAV",
+   "away": "ACV"
+  },
+  {
+   "j": 27,
+   "home": "NAC",
+   "away": "ARO"
+  },
+  {
+   "j": 27,
+   "home": "FAM",
+   "away": "BRA"
+  },
+  {
+   "j": 27,
+   "home": "SCP",
+   "away": "CPA"
+  },
+  {
+   "j": 27,
+   "home": "VSC",
+   "away": "GVF"
+  },
+  {
+   "j": 27,
+   "home": "SCL",
+   "away": "MAR"
+  },
+  {
+   "j": 27,
+   "home": "EAM",
+   "away": "MOR"
+  },
+  {
+   "j": 27,
+   "home": "EST",
+   "away": "FCP"
+  },
+  {
+   "j": 27,
+   "home": "ALV",
+   "away": "SLB"
+  },
+  {
+   "j": 11,
+   "home": "ALV",
+   "away": "CPA"
+  },
+  {
+   "j": 11,
+   "home": "EAM",
+   "away": "SLB"
+  },
+  {
+   "j": 11,
+   "home": "EST",
+   "away": "MAR"
+  },
+  {
+   "j": 11,
+   "home": "FAM",
+   "away": "ARO"
+  },
+  {
+   "j": 11,
+   "home": "NAC",
+   "away": "ACV"
+  },
+  {
+   "j": 11,
+   "home": "RAV",
+   "away": "BRA"
+  },
+  {
+   "j": 11,
+   "home": "SCL",
+   "away": "GVF"
+  },
+  {
+   "j": 11,
+   "home": "SCP",
+   "away": "MOR"
+  },
+  {
+   "j": 11,
+   "home": "VSC",
+   "away": "FCP"
+  },
+  {
+   "j": 28,
+   "home": "CPA",
+   "away": "ALV"
+  },
+  {
+   "j": 28,
+   "home": "SLB",
+   "away": "EAM"
+  },
+  {
+   "j": 28,
+   "home": "MAR",
+   "away": "EST"
+  },
+  {
+   "j": 28,
+   "home": "ARO",
+   "away": "FAM"
+  },
+  {
+   "j": 28,
+   "home": "ACV",
+   "away": "NAC"
+  },
+  {
+   "j": 28,
+   "home": "BRA",
+   "away": "RAV"
+  },
+  {
+   "j": 28,
+   "home": "GVF",
+   "away": "SCL"
+  },
+  {
+   "j": 28,
+   "home": "MOR",
+   "away": "SCP"
+  },
+  {
+   "j": 28,
+   "home": "FCP",
+   "away": "VSC"
+  },
+  {
+   "j": 12,
+   "home": "ACV",
+   "away": "ALV"
+  },
+  {
+   "j": 12,
+   "home": "ARO",
+   "away": "RAV"
+  },
+  {
+   "j": 12,
+   "home": "CPA",
+   "away": "BRA"
+  },
+  {
+   "j": 12,
+   "home": "GVF",
+   "away": "EST"
+  },
+  {
+   "j": 12,
+   "home": "MAR",
+   "away": "NAC"
+  },
+  {
+   "j": 12,
+   "home": "MOR",
+   "away": "SCL"
+  },
+  {
+   "j": 12,
+   "home": "FCP",
+   "away": "SCP"
+  },
+  {
+   "j": 12,
+   "home": "SLB",
+   "away": "FAM"
+  },
+  {
+   "j": 12,
+   "home": "VSC",
+   "away": "EAM"
+  },
+  {
+   "j": 29,
+   "home": "ALV",
+   "away": "ACV"
+  },
+  {
+   "j": 29,
+   "home": "RAV",
+   "away": "ARO"
+  },
+  {
+   "j": 29,
+   "home": "BRA",
+   "away": "CPA"
+  },
+  {
+   "j": 29,
+   "home": "EST",
+   "away": "GVF"
+  },
+  {
+   "j": 29,
+   "home": "NAC",
+   "away": "MAR"
+  },
+  {
+   "j": 29,
+   "home": "SCL",
+   "away": "MOR"
+  },
+  {
+   "j": 29,
+   "home": "SCP",
+   "away": "FCP"
+  },
+  {
+   "j": 29,
+   "home": "FAM",
+   "away": "SLB"
+  },
+  {
+   "j": 29,
+   "home": "EAM",
+   "away": "VSC"
+  },
+  {
+   "j": 13,
+   "home": "ALV",
+   "away": "MOR"
+  },
+  {
+   "j": 13,
+   "home": "EAM",
+   "away": "GVF"
+  },
+  {
+   "j": 13,
+   "home": "BRA",
+   "away": "ARO"
+  },
+  {
+   "j": 13,
+   "home": "EST",
+   "away": "VSC"
+  },
+  {
+   "j": 13,
+   "home": "FAM",
+   "away": "ACV"
+  },
+  {
+   "j": 13,
+   "home": "NAC",
+   "away": "SLB"
+  },
+  {
+   "j": 13,
+   "home": "RAV",
+   "away": "CPA"
+  },
+  {
+   "j": 13,
+   "home": "SCL",
+   "away": "FCP"
+  },
+  {
+   "j": 13,
+   "home": "SCP",
+   "away": "MAR"
+  },
+  {
+   "j": 30,
+   "home": "MOR",
+   "away": "ALV"
+  },
+  {
+   "j": 30,
+   "home": "GVF",
+   "away": "EAM"
+  },
+  {
+   "j": 30,
+   "home": "ARO",
+   "away": "BRA"
+  },
+  {
+   "j": 30,
+   "home": "VSC",
+   "away": "EST"
+  },
+  {
+   "j": 30,
+   "home": "ACV",
+   "away": "FAM"
+  },
+  {
+   "j": 30,
+   "home": "SLB",
+   "away": "NAC"
+  },
+  {
+   "j": 30,
+   "home": "CPA",
+   "away": "RAV"
+  },
+  {
+   "j": 30,
+   "home": "FCP",
+   "away": "SCL"
+  },
+  {
+   "j": 30,
+   "home": "MAR",
+   "away": "SCP"
+  },
+  {
+   "j": 14,
+   "home": "ACV",
+   "away": "ARO"
+  },
+  {
+   "j": 14,
+   "home": "CPA",
+   "away": "NAC"
+  },
+  {
+   "j": 14,
+   "home": "EST",
+   "away": "SCL"
+  },
+  {
+   "j": 14,
+   "home": "GVF",
+   "away": "SCP"
+  },
+  {
+   "j": 14,
+   "home": "MAR",
+   "away": "RAV"
+  },
+  {
+   "j": 14,
+   "home": "MOR",
+   "away": "FAM"
+  },
+  {
+   "j": 14,
+   "home": "FCP",
+   "away": "EAM"
+  },
+  {
+   "j": 14,
+   "home": "SLB",
+   "away": "BRA"
+  },
+  {
+   "j": 14,
+   "home": "VSC",
+   "away": "ALV"
+  },
+  {
+   "j": 31,
+   "home": "ARO",
+   "away": "ACV"
+  },
+  {
+   "j": 31,
+   "home": "NAC",
+   "away": "CPA"
+  },
+  {
+   "j": 31,
+   "home": "SCL",
+   "away": "EST"
+  },
+  {
+   "j": 31,
+   "home": "SCP",
+   "away": "GVF"
+  },
+  {
+   "j": 31,
+   "home": "RAV",
+   "away": "MAR"
+  },
+  {
+   "j": 31,
+   "home": "FAM",
+   "away": "MOR"
+  },
+  {
+   "j": 31,
+   "home": "EAM",
+   "away": "FCP"
+  },
+  {
+   "j": 31,
+   "home": "BRA",
+   "away": "SLB"
+  },
+  {
+   "j": 31,
+   "home": "ALV",
+   "away": "VSC"
+  },
+  {
+   "j": 15,
+   "home": "ALV",
+   "away": "GVF"
+  },
+  {
+   "j": 15,
+   "home": "EAM",
+   "away": "MAR"
+  },
+  {
+   "j": 15,
+   "home": "ARO",
+   "away": "CPA"
+  },
+  {
+   "j": 15,
+   "home": "BRA",
+   "away": "ACV"
+  },
+  {
+   "j": 15,
+   "home": "FAM",
+   "away": "FCP"
+  },
+  {
+   "j": 15,
+   "home": "NAC",
+   "away": "MOR"
+  },
+  {
+   "j": 15,
+   "home": "RAV",
+   "away": "SLB"
+  },
+  {
+   "j": 15,
+   "home": "SCL",
+   "away": "VSC"
+  },
+  {
+   "j": 15,
+   "home": "SCP",
+   "away": "EST"
+  },
+  {
+   "j": 32,
+   "home": "GVF",
+   "away": "ALV"
+  },
+  {
+   "j": 32,
+   "home": "MAR",
+   "away": "EAM"
+  },
+  {
+   "j": 32,
+   "home": "CPA",
+   "away": "ARO"
+  },
+  {
+   "j": 32,
+   "home": "ACV",
+   "away": "BRA"
+  },
+  {
+   "j": 32,
+   "home": "FCP",
+   "away": "FAM"
+  },
+  {
+   "j": 32,
+   "home": "MOR",
+   "away": "NAC"
+  },
+  {
+   "j": 32,
+   "home": "SLB",
+   "away": "RAV"
+  },
+  {
+   "j": 32,
+   "home": "VSC",
+   "away": "SCL"
+  },
+  {
+   "j": 32,
+   "home": "EST",
+   "away": "SCP"
+  },
+  {
+   "j": 16,
+   "home": "CPA",
+   "away": "FAM"
+  },
+  {
+   "j": 16,
+   "home": "EST",
+   "away": "ALV"
+  },
+  {
+   "j": 16,
+   "home": "GVF",
+   "away": "ARO"
+  },
+  {
+   "j": 16,
+   "home": "MAR",
+   "away": "BRA"
+  },
+  {
+   "j": 16,
+   "home": "MOR",
+   "away": "ACV"
+  },
+  {
+   "j": 16,
+   "home": "FCP",
+   "away": "NAC"
+  },
+  {
+   "j": 16,
+   "home": "SCL",
+   "away": "EAM"
+  },
+  {
+   "j": 16,
+   "home": "SLB",
+   "away": "SCP"
+  },
+  {
+   "j": 16,
+   "home": "VSC",
+   "away": "RAV"
+  },
+  {
+   "j": 33,
+   "home": "FAM",
+   "away": "CPA"
+  },
+  {
+   "j": 33,
+   "home": "ALV",
+   "away": "EST"
+  },
+  {
+   "j": 33,
+   "home": "ARO",
+   "away": "GVF"
+  },
+  {
+   "j": 33,
+   "home": "BRA",
+   "away": "MAR"
+  },
+  {
+   "j": 33,
+   "home": "ACV",
+   "away": "MOR"
+  },
+  {
+   "j": 33,
+   "home": "NAC",
+   "away": "FCP"
+  },
+  {
+   "j": 33,
+   "home": "EAM",
+   "away": "SCL"
+  },
+  {
+   "j": 33,
+   "home": "SCP",
+   "away": "SLB"
+  },
+  {
+   "j": 33,
+   "home": "RAV",
+   "away": "VSC"
+  },
+  {
+   "j": 17,
+   "home": "ACV",
+   "away": "CPA"
+  },
+  {
+   "j": 17,
+   "home": "ALV",
+   "away": "MAR"
+  },
+  {
+   "j": 17,
+   "home": "EAM",
+   "away": "EST"
+  },
+  {
+   "j": 17,
+   "home": "ARO",
+   "away": "SLB"
+  },
+  {
+   "j": 17,
+   "home": "BRA",
+   "away": "FCP"
+  },
+  {
+   "j": 17,
+   "home": "FAM",
+   "away": "VSC"
+  },
+  {
+   "j": 17,
+   "home": "NAC",
+   "away": "GVF"
+  },
+  {
+   "j": 17,
+   "home": "RAV",
+   "away": "MOR"
+  },
+  {
+   "j": 17,
+   "home": "SCP",
+   "away": "SCL"
+  },
+  {
+   "j": 34,
+   "home": "CPA",
+   "away": "ACV"
+  },
+  {
+   "j": 34,
+   "home": "MAR",
+   "away": "ALV"
+  },
+  {
+   "j": 34,
+   "home": "EST",
+   "away": "EAM"
+  },
+  {
+   "j": 34,
+   "home": "SLB",
+   "away": "ARO"
+  },
+  {
+   "j": 34,
+   "home": "FCP",
+   "away": "BRA"
+  },
+  {
+   "j": 34,
+   "home": "VSC",
+   "away": "FAM"
+  },
+  {
+   "j": 34,
+   "home": "GVF",
+   "away": "NAC"
+  },
+  {
+   "j": 34,
+   "home": "MOR",
+   "away": "RAV"
+  },
+  {
+   "j": 34,
+   "home": "SCL",
+   "away": "SCP"
+  }
+ ]
 }
