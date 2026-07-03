@@ -7,7 +7,7 @@ const SEASON = '2026';    // época 2026/27
 
 // cache em memória (persiste entre invocações "quentes" da função)
 const cache = new Map();
-const TTL = { matches: 60, standings: 300, scorers: 600, match: 45 };
+const TTL = { matches: 60, standings: 300, scorers: 600, match: 45, teams: 21600 };
 
 async function fd(path) {
   const r = await fetch(`${BASE}${path}`, {
@@ -72,6 +72,18 @@ exports.handler = async (event) => {
       ttl = TTL.scorers;
       cacheKey = 'scorers';
       fetcher = () => fdSeasonFallback(`/competitions/${COMP}/scorers`, 'limit=15');
+      break;
+    case 'teams':
+      // para os emblemas serve a época corrente, mesmo que 2026/27 ainda não exista
+      ttl = TTL.teams;
+      cacheKey = 'teams';
+      fetcher = async () => {
+        try { return await fd(`/competitions/${COMP}/teams?season=${SEASON}`); }
+        catch (e) {
+          if (e.status !== 404 && e.status !== 400) throw e;
+          return fd(`/competitions/${COMP}/teams`);
+        }
+      };
       break;
     case 'match':
       if (!id) return { statusCode: 400, headers, body: JSON.stringify({ error: 'falta id' }) };
