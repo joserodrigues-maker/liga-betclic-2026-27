@@ -15,6 +15,7 @@
     standings: null,
     scorers: [],
     crests: new Map(),        // id -> URL do emblema (football-data)
+    crestOverrides: new Set(),// ids com emblema fixado no seed (ganha à API)
     crestsLoaded: false,
     events: new Map(),       // apiId -> {loaded, goals, bookings}
     tvDefaults: {},
@@ -71,7 +72,10 @@
   }
 
   function normalizeSeed(seed) {
-    seed.teams.forEach(t => S.teams.set(t.id, t));
+    seed.teams.forEach(t => {
+      S.teams.set(t.id, t);
+      if (t.crest) { S.crests.set(t.id, t.crest); S.crestOverrides.add(t.id); }
+    });
     S.jornadas = seed.jornadas;
     for (const m of seed.matches) {
       const match = {
@@ -189,7 +193,7 @@
         if (tm && Array.isArray(tm.teams)) {
           for (const t of tm.teams) {
             const tid = teamIdFromApi(t);
-            if (tid && t.crest) S.crests.set(tid, t.crest);
+            if (tid && t.crest && !S.crestOverrides.has(tid)) S.crests.set(tid, t.crest);
           }
           if (tm.teams.length) S.crestsLoaded = true;
         }
