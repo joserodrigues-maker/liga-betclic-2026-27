@@ -14,6 +14,8 @@
     jornadas: {},            // j -> data base (domingo)
     standings: null,
     scorers: [],
+    crests: new Map(),        // id -> URL do emblema (football-data)
+    crestsLoaded: false,
     events: new Map(),       // apiId -> {loaded, goals, bookings}
     tvDefaults: {},
     jornada: 1,
@@ -181,6 +183,18 @@
       const sc = await api('scorers');
       if (sc && sc.scorers) S.scorers = sc.scorers;
     } catch (e) { /* opcional */ }
+    if (!S.crestsLoaded) {
+      try {
+        const tm = await api('teams');
+        if (tm && Array.isArray(tm.teams)) {
+          for (const t of tm.teams) {
+            const tid = teamIdFromApi(t);
+            if (tid && t.crest) S.crests.set(tid, t.crest);
+          }
+          if (tm.teams.length) S.crestsLoaded = true;
+        }
+      } catch (e) { /* emblemas são opcionais */ }
+    }
 
     $('devBanner').hidden = S.apiOk;
     if (S.overrides) applyOverrides(S.overrides); // overrides ganham sempre à API
@@ -220,7 +234,9 @@
   }
 
   /* ---------- render ---------- */
-  function crest(t, size) {
+  function crest(t) {
+    const url = S.crests.get(t.id);
+    if (url) return `<img class="crest crest-img" src="${esc(url)}" alt="${esc(t.name)}" title="${esc(t.name)}" loading="lazy" onerror="this.outerHTML='<span class=&quot;crest&quot; style=&quot;background:${t.color}&quot;>${esc(t.id)}</span>'">`;
     return `<span class="crest" style="background:${t.color}" title="${esc(t.name)}">${esc(t.id)}</span>`;
   }
 
