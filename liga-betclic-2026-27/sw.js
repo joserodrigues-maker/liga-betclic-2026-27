@@ -1,5 +1,5 @@
 /* Liga Betclic 2026/27 — service worker */
-const VERSION = 'v1.0.0';
+const VERSION = 'v1.1.0';
 const SHELL_CACHE = `shell-${VERSION}`;
 const DATA_CACHE = `data-${VERSION}`;
 
