@@ -3,12 +3,31 @@
     "descricao": "Ficheiro de acertos manuais. Edita e faz redeploy (ou commit se tiveres CI). Tudo aqui sobrepõe-se aos dados da API e do seed.",
     "tvDefaults": "Canal por omissão consoante a equipa da casa (id da equipa -> canal).",
     "matches": "Lista de acertos por jogo. Identifica o jogo por jornada + home + away (ids do seed.json). Campos possíveis: date (YYYY-MM-DD), time (HH:MM, hora de Portugal continental), tv, confirmed (true quando data/hora são oficiais), status ('POSTPONED' para adiado), nota (texto livre mostrado no cartão).",
-    "exemplo": { "j": 1, "home": "EAM", "away": "SCP", "date": "2026-08-09", "time": "20:30", "tv": "Sport TV1", "confirmed": true }
+    "exemplo": { "j": 1, "home": "EAM", "away": "SCP", "date": "2026-08-08", "time": "20:30", "tv": "Sport TV", "confirmed": true }
   },
   "tvDefaults": {
     "SLB": "BTV",
     "*": "Sport TV"
   },
   "matches": [
+    { "j": 1, "home": "EST", "away": "FAM", "date": "2026-08-07", "time": "20:15", "tv": "Sport TV", "confirmed": true },
+    { "j": 1, "home": "MAR", "away": "CPA", "date": "2026-08-08", "time": "15:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 1, "home": "VSC", "away": "ARO", "date": "2026-08-08", "time": "18:00", "tv": "Sport TV", "confirmed": true },
+    { "j": 1, "home": "EAM", "away": "SCP", "date": "2026-08-08", "time": "20:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 1, "home": "FCP", "away": "ALV", "date": "2026-08-09", "time": "18:00", "tv": "Sport TV", "confirmed": true },
+    { "j": 1, "home": "GVF", "away": "RAV", "date": "2026-08-09", "time": "20:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 1, "home": "MOR", "away": "BRA", "date": "2026-08-09", "time": "20:30", "tv": "TVI", "nota": "Hora sujeita a confirmação (Braga nas provas europeias)" },
+    { "j": 1, "home": "SLB", "away": "ACV", "date": "2026-08-09", "time": "20:30", "tv": "BTV", "nota": "Hora sujeita a confirmação (Benfica na Liga Europa)" },
+    { "j": 1, "home": "SCL", "away": "NAC", "date": "2026-08-10", "time": "20:15", "tv": "Sport TV", "confirmed": true },
+
+    { "j": 2, "home": "SCP", "away": "VSC", "date": "2026-08-14", "time": "20:15", "tv": "Sport TV", "confirmed": true },
+    { "j": 2, "home": "ALV", "away": "EAM", "date": "2026-08-15", "time": "15:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 2, "home": "ACV", "away": "SCL", "date": "2026-08-15", "time": "18:00", "tv": "Sport TV", "confirmed": true },
+    { "j": 2, "home": "RAV", "away": "FCP", "date": "2026-08-15", "time": "20:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 2, "home": "FAM", "away": "MAR", "date": "2026-08-16", "time": "15:30", "tv": "Sport TV", "nota": "Hora sujeita a confirmação" },
+    { "j": 2, "home": "NAC", "away": "EST", "date": "2026-08-16", "time": "15:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 2, "home": "BRA", "away": "GVF", "date": "2026-08-16", "time": "20:30", "tv": "Sport TV", "nota": "Hora sujeita a confirmação (Braga nas provas europeias)" },
+    { "j": 2, "home": "CPA", "away": "SLB", "date": "2026-08-16", "time": "20:30", "tv": "Sport TV", "nota": "Hora sujeita a confirmação (Benfica na Liga Europa)" },
+    { "j": 2, "home": "ARO", "away": "MOR", "date": "2026-08-17", "time": "20:15", "tv": "Sport TV", "nota": "Hora sujeita a confirmação" }
   ]
 }
