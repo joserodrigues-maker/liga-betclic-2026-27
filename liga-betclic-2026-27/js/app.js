@@ -109,10 +109,13 @@
         S.matches.push(m);
       }
       m.apiId = am.id;
-      if (am.utcDate) m.utcDate = new Date(am.utcDate);
       m.status = am.status || m.status;
-      // TIMED = hora oficial definida
-      if (['TIMED', 'IN_PLAY', 'PAUSED', 'FINISHED'].includes(m.status)) m.confirmed = true;
+      // SCHEDULED traz horas-placeholder na football-data — ignorar.
+      // Só TIMED (e estados seguintes) têm hora oficial.
+      if (am.utcDate && ['TIMED', 'IN_PLAY', 'PAUSED', 'FINISHED', 'SUSPENDED'].includes(m.status)) {
+        m.utcDate = new Date(am.utcDate);
+        m.confirmed = true;
+      }
       const ft = am.score && am.score.fullTime;
       if (ft && (ft.home !== null || ft.away !== null)) { m.scoreH = ft.home; m.scoreA = ft.away; }
       if (am.minute != null) m.minute = am.minute;
@@ -251,7 +254,7 @@
       const min = m.status === 'PAUSED' ? 'INTERVALO' : (m.minute != null ? `${m.minute}'` : 'AO VIVO');
       return `<div class="match-status live">● ${min}</div>`;
     }
-    if (m.utcDate && m.confirmed && !m.utcDate._noTime) return `<div class="match-status">${fmtTime.format(m.utcDate)}</div>`;
+    if (m.utcDate && !m.utcDate._noTime && (m.confirmed || m.overrideTimeSet)) return `<div class="match-status">${fmtTime.format(m.utcDate)}</div>`;
     return `<div class="match-status">—</div>`;
   }
 
