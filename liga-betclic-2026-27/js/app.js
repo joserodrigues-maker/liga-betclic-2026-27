@@ -112,7 +112,17 @@ const LINEUPS_ENABLED = true;  // ativar quando houver fonte de onzes que cubra 
         S.matches.push(m);
       }
       m.apiId = am.id;
-      m.status = am.status || m.status;
+    // sanear status: a football-data por vezes devolve valores inválidos (ex.: datas)
+    const VALID_ST = ['SCHEDULED', 'TIMED', 'IN_PLAY', 'PAUSED', 'FINISHED', 'SUSPENDED', 'POSTPONED', 'CANCELLED', 'AWARDED'];
+    const ft0 = am.score && am.score.fullTime;
+    const hasScore = !!(ft0 && (ft0.home !== null || ft0.away !== null));
+    let st = VALID_ST.includes(am.status) ? am.status : null;
+    if (!st && am.utcDate && hasScore) {
+      const ko = new Date(am.utcDate).getTime();
+      if (Date.now() > ko + 150 * 60000) st = 'FINISHED';
+      else if (Date.now() > ko) st = 'IN_PLAY';
+    }
+    if (st) m.status = st;
       // SCHEDULED traz horas-placeholder na football-data — ignorar.
       // Só TIMED (e estados seguintes) têm hora oficial.
       if (am.utcDate && ['TIMED', 'IN_PLAY', 'PAUSED', 'FINISHED', 'SUSPENDED'].includes(m.status)) {
