@@ -119,6 +119,6 @@ exports.handler = async (event) => {
     put(luKey, payload);
     return ok(payload);
   } catch (e) {
-    return ok({ available: false, reason: 'Fonte de onzes indisponível: ' + ((e && e.message) || 'erro desconhecido') });
+    return ok({ available: false, reason: /plan/i.test((e && e.message) || '') ? 'Onzes indisponíveis: o plano gratuito da API-Football não cobre a época 2026/27.' : 'Fonte de onzes temporariamente indisponível.' });
   }
 };
