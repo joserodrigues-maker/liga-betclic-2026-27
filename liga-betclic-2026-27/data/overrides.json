@@ -16,8 +16,8 @@
     { "j": 1, "home": "EAM", "away": "SCP", "date": "2026-08-08", "time": "20:30", "tv": "Sport TV", "confirmed": true },
     { "j": 1, "home": "FCP", "away": "ALV", "date": "2026-08-09", "time": "18:00", "tv": "Sport TV", "confirmed": true },
     { "j": 1, "home": "GVF", "away": "RAV", "date": "2026-08-09", "time": "20:30", "tv": "Sport TV", "confirmed": true },
-    { "j": 1, "home": "MOR", "away": "BRA", "date": "2026-08-09", "time": "20:30", "tv": "TVI", "nota": "Hora sujeita a confirmação (Braga nas provas europeias)" },
-    { "j": 1, "home": "SLB", "away": "ACV", "date": "2026-08-09", "time": "20:30", "tv": "BTV", "nota": "Hora sujeita a confirmação (Benfica na Liga Europa)" },
+    { "j": 1, "home": "MOR", "away": "BRA", "date": "2026-08-09", "time": "20:30", "tv": "TVI", "confirmed": true },
+    { "j": 1, "home": "SLB", "away": "ACV", "date": "2026-08-09", "time": "20:30", "tv": "BTV", "confirmed": true, "nota": "Jogo à porta fechada" },
     { "j": 1, "home": "SCL", "away": "NAC", "date": "2026-08-10", "time": "20:15", "tv": "Sport TV", "confirmed": true },
 
     { "j": 2, "home": "SCP", "away": "VSC", "date": "2026-08-14", "time": "20:15", "tv": "Sport TV", "confirmed": true },
@@ -26,8 +26,28 @@
     { "j": 2, "home": "RAV", "away": "FCP", "date": "2026-08-15", "time": "20:30", "tv": "Sport TV", "confirmed": true },
     { "j": 2, "home": "FAM", "away": "MAR", "date": "2026-08-16", "time": "15:30", "tv": "Sport TV", "nota": "Hora sujeita a confirmação" },
     { "j": 2, "home": "NAC", "away": "EST", "date": "2026-08-16", "time": "15:30", "tv": "Sport TV", "confirmed": true },
-    { "j": 2, "home": "BRA", "away": "GVF", "date": "2026-08-16", "time": "20:30", "tv": "Sport TV", "nota": "Hora sujeita a confirmação (Braga nas provas europeias)" },
-    { "j": 2, "home": "CPA", "away": "SLB", "date": "2026-08-16", "time": "20:30", "tv": "Sport TV", "nota": "Hora sujeita a confirmação (Benfica na Liga Europa)" },
-    { "j": 2, "home": "ARO", "away": "MOR", "date": "2026-08-17", "time": "20:15", "tv": "Sport TV", "nota": "Hora sujeita a confirmação" }
+    { "j": 2, "home": "BRA", "away": "GVF", "date": "2026-08-16", "time": "20:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 2, "home": "CPA", "away": "SLB", "date": "2026-08-17", "time": "20:15", "tv": "Sport TV", "confirmed": true, "nota": "Adiado de 16/08 devido às pré-eliminatórias europeias do Benfica" },
+    { "j": 2, "home": "ARO", "away": "MOR", "date": "2026-08-17", "time": "20:15", "tv": "Sport TV", "nota": "Hora sujeita a confirmação" },
+
+    { "j": 3, "home": "MAR", "away": "ACV", "date": "2026-08-22", "time": "15:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 3, "home": "EST", "away": "RAV", "date": "2026-08-22", "time": "18:00", "tv": "Sport TV", "confirmed": true },
+    { "j": 3, "home": "SCP", "away": "ALV", "date": "2026-08-22", "time": "20:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 3, "home": "VSC", "away": "NAC", "date": "2026-08-23", "time": "15:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 3, "home": "SCL", "away": "FAM", "date": "2026-08-23", "time": "18:00", "tv": "Sport TV", "confirmed": true },
+    { "j": 3, "home": "FCP", "away": "ARO", "date": "2026-08-23", "time": "20:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 3, "home": "GVF", "away": "CPA", "date": "2026-08-24", "time": "20:15", "tv": "Sport TV", "confirmed": true },
+    { "j": 3, "home": "MOR", "away": "SLB", "date": "2026-09-09", "time": "20:15", "tv": "TVI", "nota": "Adiado para 9/09; sujeito a confirmação (Benfica nas provas europeias)" },
+    { "j": 3, "home": "EAM", "away": "BRA", "date": "2026-09-10", "time": "20:15", "tv": "Sport TV", "nota": "Adiado para 10/09; sujeito a confirmação (Braga nas provas europeias)" },
+
+    { "j": 4, "home": "RAV", "away": "SCP", "date": "2026-08-28", "time": "20:15", "tv": "Sport TV", "confirmed": true },
+    { "j": 4, "home": "ALV", "away": "SCL", "date": "2026-08-29", "time": "15:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 4, "home": "ARO", "away": "MAR", "date": "2026-08-29", "time": "15:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 4, "home": "ACV", "away": "FCP", "date": "2026-08-29", "time": "18:00", "tv": "Sport TV", "confirmed": true },
+    { "j": 4, "home": "NAC", "away": "EAM", "date": "2026-08-30", "time": "15:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 4, "home": "CPA", "away": "MOR", "date": "2026-08-30", "time": "18:00", "tv": "Sport TV", "confirmed": true },
+    { "j": 4, "home": "FAM", "away": "GVF", "date": "2026-08-30", "time": "20:30", "tv": "Sport TV", "confirmed": true },
+    { "j": 4, "home": "SLB", "away": "EST", "date": "2026-08-31", "time": "18:45", "tv": "BTV", "nota": "Sujeito a confirmação (Benfica nas provas europeias)" },
+    { "j": 4, "home": "BRA", "away": "VSC", "date": "2026-08-31", "time": "20:45", "tv": "Sport TV", "nota": "Sujeito a confirmação (Braga nas provas europeias)" }
   ]
 }
