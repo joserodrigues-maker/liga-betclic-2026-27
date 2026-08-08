@@ -5,6 +5,7 @@
   const API_BASE = '/api';
   const POLL_LIVE_MS = 60 * 1000;      // atualização durante jogos
   const POLL_IDLE_MS = 10 * 60 * 1000; // atualização fora de jogos
+const LINEUP_WINDOW_MS = 75 * 60 * 1000; // pedir onzes a partir de 75 min antes do jogo
   const TZ = 'Europe/Lisbon';
 
   const S = {
@@ -18,6 +19,7 @@
     crestOverrides: new Set(),// ids com emblema fixado no seed (ganha à API)
     crestsLoaded: false,
     events: new Map(),       // apiId -> {loaded, goals, bookings}
+  lineups: new Map(),       // key -> {t, data}
     tvDefaults: {},
     jornada: 1,
     apiOk: false,
@@ -206,6 +208,7 @@
     $('devBanner').hidden = S.apiOk;
     if (S.overrides) applyOverrides(S.overrides); // overrides ganham sempre à API
     await refreshLiveEvents();
+  await refreshLineups();
     renderAll();
   }
 
@@ -224,6 +227,61 @@
   }
 
   const isLive = (m) => m.status === 'IN_PLAY' || m.status === 'PAUSED';
+
+/* ---------- onzes iniciais (API-Football via /api/lineups) ---------- */
+function lineupWindowOpen(m) {
+  if (isLive(m) || m.status === 'FINISHED') return true;
+  if (!m.utcDate || m.utcDate._noTime) return false;
+  return Date.now() >= m.utcDate.getTime() - LINEUP_WINDOW_MS;
+}
+
+function needLineups(m) {
+  const c = S.lineups.get(m.key);
+  if (!c) return true;
+  if (c.data && c.data.available) return false;      // onzes anunciados não mudam
+  return Date.now() - c.t > 5 * 60 * 1000;           // tenta de novo a cada 5 min
+}
+
+async function refreshLineups() {
+  const wanted = S.matches.filter(m =>
+    S.expanded.has(m.key) && lineupWindowOpen(m) && needLineups(m)
+  );
+  await Promise.all(wanted.map(async m => {
+    const dk = m.utcDate ? dayKey(m.utcDate) : null;
+    if (!dk) return;
+    try {
+      const r = await fetch(`${API_BASE}/lineups?date=${dk}&home=${m.home}&away=${m.away}`);
+      if (!r.ok) throw new Error('lineups');
+      S.lineups.set(m.key, { t: Date.now(), data: await r.json() });
+    } catch (e) { /* tenta na próxima volta */ }
+  }));
+}
+
+function lineupsBlock(m) {
+  if (!S.expanded.has(m.key) || !lineupWindowOpen(m)) return '';
+  const c = S.lineups.get(m.key);
+  if (!c || !c.data) return `<div class="lineups"><div class="lu-loading">A carregar onzes…</div></div>`;
+  if (!c.data.available) {
+    return `<div class="lineups"><div class="lu-loading">${esc(c.data.reason || 'Onzes ainda não anunciados.')}</div></div>`;
+  }
+  const side = (s) => `
+    <div class="lu-col">
+      <div class="lu-head">${esc(s.formation || '')}</div>
+      <ol class="lu-xi">${(s.xi || []).map(p => `<li><span class="lu-num">${p.number ?? ''}</span> ${esc(p.name)}</li>`).join('')}</ol>
+      ${s.coach ? `<div class="lu-coach">Treinador: ${esc(s.coach)}</div>` : ''}
+    </div>`;
+  return `<div class="lineups"><div class="lu-title">Onzes iniciais</div><div class="lu-grid">${side(c.data.home)}${side(c.data.away)}</div></div>`;
+}
+
+function resumoBlock(m) {
+  if (!S.expanded.has(m.key) || m.status !== 'FINISHED') return '';
+  const h = S.teams.get(m.home), a = S.teams.get(m.away);
+  const score = m.scoreH !== null ? ` ${m.scoreH}-${m.scoreA} ` : ' ';
+  const q = encodeURIComponent(`Resumo ${h.short}${score}${a.short} Liga Portugal Betclic`);
+  return `<div class="resumo"><a class="resumo-btn" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${q}">▶ Ver resumo do jogo</a></div>`;
+}
+
+
 
   /* ---------- jornada atual ---------- */
   function currentJornada() {
@@ -318,6 +376,8 @@
         </button>
         ${metaLine(m)}
         ${eventsBlock(m)}
+  ${lineupsBlock(m)}
+  ${resumoBlock(m)}
       </article>`;
   }
 
@@ -512,9 +572,12 @@
         const key = t.dataset.toggle;
         S.expanded.has(key) ? S.expanded.delete(key) : S.expanded.add(key);
         const m = S.byKey.get(key);
-        if (m && S.expanded.has(key) && m.apiId && !(S.events.get(m.apiId) || {}).loaded) {
-          refreshLiveEvents().then(renderAll);
-        }
+        if (m && S.expanded.has(key)) {
+        const jobs = [];
+        if (m.apiId && !(S.events.get(m.apiId) || {}).loaded) jobs.push(refreshLiveEvents());
+        if (lineupWindowOpen(m) && needLineups(m)) jobs.push(refreshLineups());
+        if (jobs.length) Promise.all(jobs).then(renderAll);
+      }
         renderJogos(); renderClubes();
       }
       const club = e.target.closest('[data-club]');
