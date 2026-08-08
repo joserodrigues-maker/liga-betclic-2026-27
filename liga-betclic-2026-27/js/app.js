@@ -6,7 +6,7 @@
   const POLL_LIVE_MS = 60 * 1000;      // atualização durante jogos
   const POLL_IDLE_MS = 10 * 60 * 1000; // atualização fora de jogos
 const LINEUP_WINDOW_MS = 75 * 60 * 1000; // pedir onzes a partir de 75 min antes do jogo
-const LINEUPS_ENABLED = false; // ativar quando houver fonte de onzes que cubra a época atual
+const LINEUPS_ENABLED = true;  // ativar quando houver fonte de onzes que cubra a época atual
   const TZ = 'Europe/Lisbon';
 
   const S = {
@@ -252,7 +252,7 @@ async function refreshLineups() {
     const dk = m.utcDate ? dayKey(m.utcDate) : null;
     if (!dk) return;
     try {
-      const r = await fetch(`${API_BASE}/lineups?date=${dk}&home=${m.home}&away=${m.away}`);
+      const r = await fetch(`${API_BASE}/lineups?j=${m.j}&home=${m.home}&away=${m.away}`);
       if (!r.ok) throw new Error('lineups');
       S.lineups.set(m.key, { t: Date.now(), data: await r.json() });
     } catch (e) { /* tenta na próxima volta */ }
