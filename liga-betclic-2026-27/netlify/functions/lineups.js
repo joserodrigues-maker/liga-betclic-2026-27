@@ -119,6 +119,6 @@ exports.handler = async (event) => {
     put(luKey, payload);
     return ok(payload);
   } catch (e) {
-    return ok({ available: false, reason: 'Fonte de onzes temporariamente indisponível.' });
+    return ok({ available: false, reason: 'Fonte de onzes indisponível: ' + ((e && e.message) || 'erro desconhecido') });
   }
 };
