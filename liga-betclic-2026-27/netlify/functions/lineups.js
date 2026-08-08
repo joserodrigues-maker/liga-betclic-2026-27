@@ -1,10 +1,14 @@
-/* Onzes iniciais via API pública do site da Liga Portugal (ligaportugal.pt).
-   Não precisa de chave. Nota: é a API interna do site — pode mudar sem aviso.
+/* Onzes iniciais + eventos (golos, cartões, substituições) via API pública
+   do site da Liga Portugal (ligaportugal.pt). Não precisa de chave.
+   Nota: é a API interna do site — pode mudar sem aviso.
    Uso: /api/lineups?j=1&home=EST&away=FAM (ids do seed.json) */
 
 const LP_BASE = 'https://www.ligaportugal.pt/api';
 const COMP = 'ligaportugalbetclic';
 const SEASON = '20262027'; // época 2026/27
+
+// tipos de ocorrência confirmados na API da Liga
+const OCC = { 1: 'sub', 2: 'amarelo', 3: 'vermelho', 4: 'golo', 5: 'autogolo', 6: 'duplo' };
 
 // cache em memória (persiste entre invocações "quentes" da função)
 const cache = new Map();
@@ -55,7 +59,7 @@ exports.handler = async (event) => {
   const headers = {
     'Content-Type': 'application/json; charset=utf-8',
     'Access-Control-Allow-Origin': '*',
-    'Cache-Control': 'public, max-age=120',
+    'Cache-Control': 'public, max-age=60',
   };
   const ok = (payload) => ({ statusCode: 200, headers, body: JSON.stringify(payload) });
 
@@ -82,16 +86,21 @@ exports.handler = async (event) => {
       teamIdFromName(f.homeTeam && f.homeTeam.name) === home &&
       teamIdFromName(f.awayTeam && f.awayTeam.name) === away
     );
-    if (!fx) return ok({ available: false, reason: 'Jogo não encontrado na fonte de onzes.' });
+    if (!fx) return ok({ available: false, events: [], reason: 'Jogo não encontrado na fonte de onzes.' });
 
-    // 2) detalhes do jogo — cache 24h se já temos onzes, 10 min enquanto não anunciados
-    const luKey = `lu-${j}-${fx.fixtureNumber}`;
-    const luHit = hit(luKey);
-    if (luHit && fresh(luHit, luHit.v.available ? 24 * 3600e3 : 10 * 60e3)) {
-      return ok(luHit.v);
+    // 2) detalhes + info dinâmica — cache 24h se terminou, 90s durante/antes do jogo
+    const miKey = `mi-${j}-${fx.fixtureNumber}`;
+    const miHit = hit(miKey);
+    if (miHit && fresh(miHit, miHit.v.final ? 24 * 3600e3 : 90e3)) {
+      return ok(miHit.v);
     }
 
-    const d = await lp(`/v1/match/details?competition=${COMP}&season=${SEASON}&round=${j}&fixture=${fx.fixtureNumber}`);
+    const qs = `competition=${COMP}&season=${SEASON}&round=${j}&fixture=${fx.fixtureNumber}`;
+    const [det, dyn] = await Promise.all([
+      lp(`/v1/match/details?${qs}`),
+      lp(`/v2/match/info/dynamic?${qs}`).catch(() => ({})),
+    ]);
+
     const simp = (parts) => {
       const xi = (parts || [])
         .filter(p => p.intervenientTypeId === 1)
@@ -99,22 +108,31 @@ exports.handler = async (event) => {
       const coach = ((parts || []).find(p => p.isMainCoach) || {}).name || '';
       return { xi, coach };
     };
-    const h = simp(d.homeTeamParticipants);
-    const a = simp(d.awayTeamParticipants);
+    const h = simp(det.homeTeamParticipants);
+    const a = simp(det.awayTeamParticipants);
 
-    let payload;
+    const events = (dyn.occurrences || [])
+      .filter(o => OCC[o.occurrenceTypeId])
+      .map(o => ({
+        t: o.time || `${o.minute}'`,
+        type: OCC[o.occurrenceTypeId],
+        name: o.playerName || o.name || '',
+        home: !!o.isHomeTeam,
+      }))
+      .reverse(); // API devolve do fim para o início; queremos ordem cronológica
+
+    const payload = { events, final: !!dyn.hasOfficialResult };
     if (h.xi.length < 11 || a.xi.length < 11) {
-      payload = { available: false, reason: 'Onzes ainda não anunciados (habitualmente ~1 hora antes do jogo).' };
+      payload.available = false;
+      payload.reason = 'Onzes ainda não anunciados (habitualmente ~1 hora antes do jogo).';
     } else {
-      payload = {
-        available: true,
-        home: { team: (d.homeTeam && d.homeTeam.name) || '', formation: '', coach: h.coach, xi: h.xi },
-        away: { team: (d.awayTeam && d.awayTeam.name) || '', formation: '', coach: a.coach, xi: a.xi },
-      };
+      payload.available = true;
+      payload.home = { team: (det.homeTeam && det.homeTeam.name) || '', formation: '', coach: h.coach, xi: h.xi };
+      payload.away = { team: (det.awayTeam && det.awayTeam.name) || '', formation: '', coach: a.coach, xi: a.xi };
     }
-    put(luKey, payload);
+    put(miKey, payload);
     return ok(payload);
   } catch (e) {
-    return ok({ available: false, reason: 'Fonte de onzes temporariamente indisponível.' });
+    return ok({ available: false, events: [], reason: 'Fonte de onzes temporariamente indisponível.' });
   }
 };
