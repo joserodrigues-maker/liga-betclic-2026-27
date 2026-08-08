@@ -121,7 +121,13 @@ exports.handler = async (event) => {
       }))
       .reverse(); // API devolve do fim para o início; queremos ordem cronológica
 
-    const payload = { events, final: !!dyn.hasOfficialResult };
+    const payload = {
+      events,
+      final: !!dyn.hasOfficialResult,
+      state: dyn.fixtureStateTypeId ?? null, // 0=por começar, 3=a decorrer, 4=terminado, 5=resultado oficial
+      min: dyn.minutes ?? null,
+      goals: (dyn.homeTeamGoals != null && dyn.awayTeamGoals != null) ? { h: dyn.homeTeamGoals, a: dyn.awayTeamGoals } : null,
+    };
     if (h.xi.length < 11 || a.xi.length < 11) {
       payload.available = false;
       payload.reason = 'Onzes ainda não anunciados (habitualmente ~1 hora antes do jogo).';
