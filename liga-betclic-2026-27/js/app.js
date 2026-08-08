@@ -251,7 +251,7 @@ function ligaScoreWanted(m) {
   if (m.status === 'FINISHED') return false;
   if (!m.utcDate || m.utcDate._noTime) return false;
   const ko = m.utcDate.getTime();
-  return Date.now() > ko - 5 * 60000 && Date.now() < ko + 3.5 * 3600e3;
+  return Date.now() > ko - 5 * 60000 && Date.now() < ko + 12 * 3600e3;
 }
 
 function applyLigaState(m, data) {
