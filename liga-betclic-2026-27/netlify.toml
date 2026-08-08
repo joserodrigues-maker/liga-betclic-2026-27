@@ -1,18 +1,23 @@
 [build]
-  publish = "."
-  functions = "netlify/functions"
+publish = "."
+functions = "netlify/functions"
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
+from = "/api/lineups"
+to = "/.netlify/functions/lineups"
+status = 200
+
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/api/:splat"
+status = 200
 
 [[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Cache-Control = "no-cache"
+for = "/sw.js"
+[headers.values]
+Cache-Control = "no-cache"
 
 [[headers]]
-  for = "/data/*"
-  [headers.values]
-    Cache-Control = "no-cache"
+for = "/data/*"
+[headers.values]
+Cache-Control = "no-cache"
