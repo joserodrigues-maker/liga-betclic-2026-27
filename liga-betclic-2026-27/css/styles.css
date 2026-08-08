@@ -399,3 +399,51 @@ img.crest-img {
   .team { font-size: .82rem; }
   .team-name { max-width: 12ch; }
 }
+
+/* ---------- Onzes iniciais ---------- */
+.lineups {
+  border-top: 1px dashed var(--border);
+  padding: 10px 14px 12px;
+  font-size: .78rem;
+}
+.lu-title {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: .08em;
+  font-size: .72rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.lu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.lu-col:first-child { text-align: right; }
+.lu-head { font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.lu-xi { list-style: none; }
+.lu-xi li { line-height: 1.6; color: var(--text-dim); }
+.lu-num { color: var(--text); font-weight: 700; }
+.lu-coach { margin-top: 6px; color: var(--text-dim); font-style: italic; }
+.lu-loading { text-align: center; color: var(--text-dim); }
+
+/* ---------- Resumo ---------- */
+.resumo {
+  border-top: 1px dashed var(--border);
+  padding: 10px 14px;
+  text-align: center;
+}
+.resumo-btn {
+  display: inline-block;
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: .78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.resumo-btn:hover { border-color: var(--accent); }
+
+@media (max-width: 520px) {
+  .lu-grid { gap: 0 10px; }
+  .lu-xi li { font-size: .72rem; }
+}
