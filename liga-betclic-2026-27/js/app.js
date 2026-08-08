@@ -246,10 +246,25 @@ function lineupWindowOpen(m) {
   return Date.now() >= m.utcDate.getTime() - LINEUP_WINDOW_MS;
 }
 
+// jogos de hoje já começados: usar a Liga como fonte de resultado (a football-data falha às vezes)
+function ligaScoreWanted(m) {
+  if (m.status === 'FINISHED') return false;
+  if (!m.utcDate || m.utcDate._noTime) return false;
+  const ko = m.utcDate.getTime();
+  return Date.now() > ko - 5 * 60000 && Date.now() < ko + 3.5 * 3600e3;
+}
+
+function applyLigaState(m, data) {
+  if (!data || data.state == null || data.state < 3) return;
+  if (data.goals) { m.scoreH = data.goals.h; m.scoreA = data.goals.a; }
+  if (data.state >= 4) { m.status = 'FINISHED'; m.minute = null; }
+  else { m.status = 'IN_PLAY'; if (data.min) m.minute = data.min; }
+}
+
 function needLineups(m) {
   const c = S.lineups.get(m.key);
   if (!c) return true;
-  if (isLive(m)) return Date.now() - c.t > 2 * 60 * 1000; // ao vivo, refrescar eventos
+  if (isLive(m) || ligaScoreWanted(m)) return Date.now() - c.t > 2 * 60 * 1000; // ao vivo, refrescar
   if (c.data && c.data.available) return false;      // onzes anunciados não mudam
   return Date.now() - c.t > 5 * 60 * 1000;           // tenta de novo a cada 5 min
 }
@@ -257,7 +272,7 @@ function needLineups(m) {
 async function refreshLineups() {
   if (!LINEUPS_ENABLED) return;
   const wanted = S.matches.filter(m =>
-    S.expanded.has(m.key) && lineupWindowOpen(m) && needLineups(m)
+    ((S.expanded.has(m.key) && lineupWindowOpen(m)) || ligaScoreWanted(m)) && needLineups(m)
   );
   await Promise.all(wanted.map(async m => {
     const dk = m.utcDate ? dayKey(m.utcDate) : null;
@@ -266,6 +281,7 @@ async function refreshLineups() {
       const r = await fetch(`${API_BASE}/lineups?j=${m.j}&home=${m.home}&away=${m.away}`);
       if (!r.ok) throw new Error('lineups');
       S.lineups.set(m.key, { t: Date.now(), data: await r.json() });
+      applyLigaState(m, (S.lineups.get(m.key) || {}).data);
     } catch (e) { /* tenta na próxima volta */ }
   }));
 }
