@@ -416,11 +416,11 @@ img.crest-img {
   text-align: center;
 }
 .lu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
-.lu-col:first-child { text-align: right; }
+.lu-col:first-child .lu-xi { border-right: 1px dashed var(--border); padding-right: 12px; margin-right: -8px; }
 .lu-head { font-weight: 800; color: var(--text); margin-bottom: 6px; }
 .lu-xi { list-style: none; }
 .lu-xi li { line-height: 1.6; color: var(--text-dim); }
-.lu-num { color: var(--text); font-weight: 700; }
+.lu-num { color: var(--text); font-weight: 700; display: inline-block; min-width: 1.8em; text-align: right; margin-right: 4px; }
 .lu-coach { margin-top: 6px; color: var(--text-dim); font-style: italic; }
 .lu-loading { text-align: center; color: var(--text-dim); }
 
