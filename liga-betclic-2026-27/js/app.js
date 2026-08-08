@@ -6,6 +6,7 @@
   const POLL_LIVE_MS = 60 * 1000;      // atualização durante jogos
   const POLL_IDLE_MS = 10 * 60 * 1000; // atualização fora de jogos
 const LINEUP_WINDOW_MS = 75 * 60 * 1000; // pedir onzes a partir de 75 min antes do jogo
+const LINEUPS_ENABLED = false; // ativar quando houver fonte de onzes que cubra a época atual
   const TZ = 'Europe/Lisbon';
 
   const S = {
@@ -243,6 +244,7 @@ function needLineups(m) {
 }
 
 async function refreshLineups() {
+  if (!LINEUPS_ENABLED) return;
   const wanted = S.matches.filter(m =>
     S.expanded.has(m.key) && lineupWindowOpen(m) && needLineups(m)
   );
@@ -258,7 +260,7 @@ async function refreshLineups() {
 }
 
 function lineupsBlock(m) {
-  if (!S.expanded.has(m.key) || !lineupWindowOpen(m)) return '';
+  if (!LINEUPS_ENABLED || !S.expanded.has(m.key) || !lineupWindowOpen(m)) return '';
   const c = S.lineups.get(m.key);
   if (!c || !c.data) return `<div class="lineups"><div class="lu-loading">A carregar onzes…</div></div>`;
   if (!c.data.available) {
@@ -339,6 +341,7 @@ function resumoBlock(m) {
 
   function eventsBlock(m) {
     if (!S.expanded.has(m.key)) return '';
+    if (!isLive(m) && m.status !== 'FINISHED') return '';
     const ev = m.apiId ? S.events.get(m.apiId) : null;
     if (!ev || !ev.loaded) {
       const msg = m.apiId ? 'A carregar eventos…' : 'Sem detalhes disponíveis (API não ligada).';
