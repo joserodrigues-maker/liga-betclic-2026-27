@@ -239,6 +239,7 @@ function lineupWindowOpen(m) {
 function needLineups(m) {
   const c = S.lineups.get(m.key);
   if (!c) return true;
+  if (isLive(m)) return Date.now() - c.t > 2 * 60 * 1000; // ao vivo, refrescar eventos
   if (c.data && c.data.available) return false;      // onzes anunciados não mudam
   return Date.now() - c.t > 5 * 60 * 1000;           // tenta de novo a cada 5 min
 }
@@ -342,6 +343,17 @@ function resumoBlock(m) {
   function eventsBlock(m) {
     if (!S.expanded.has(m.key)) return '';
     if (!isLive(m) && m.status !== 'FINISHED') return '';
+  const li = S.lineups.get(m.key);
+  const lev = li && li.data && li.data.events;
+  if (lev && lev.length) {
+    const ICON = { golo: '⚽', autogolo: '⚽', amarelo: '🟨', duplo: '🟨🟥', vermelho: '🟥', sub: '🔁' };
+    const cells = lev.map(ev => {
+      const tag = ev.type === 'autogolo' ? ' (p.b.)' : ev.type === 'sub' ? ' (entra)' : '';
+      const html = `${ICON[ev.type] || ''} <span class="min">${esc(ev.t)}</span> ${esc(ev.name)}${tag}`;
+      return ev.home ? `<div class="ev ev-home">${html}</div><div></div>` : `<div></div><div class="ev">${html}</div>`;
+    }).join('');
+    return `<div class="match-events">${cells}</div>`;
+  }
     const ev = m.apiId ? S.events.get(m.apiId) : null;
     if (!ev || !ev.loaded) {
       const msg = m.apiId ? 'A carregar eventos…' : 'Sem detalhes disponíveis (API não ligada).';
