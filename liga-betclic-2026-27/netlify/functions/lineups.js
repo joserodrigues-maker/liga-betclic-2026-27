@@ -1,11 +1,10 @@
-/* Proxy para a API-FOOTBALL (api-sports.io) — onzes iniciais.
-   Env var obrigatória no Netlify: API_FOOTBALL_KEY (plano free chega: ~100 pedidos/dia,
-   a cache abaixo garante que ficamos muito abaixo disso).
-   Uso: /api/lineups?date=YYYY-MM-DD&home=SCP&away=ALV (ids do seed.json) */
+/* Onzes iniciais via API pública do site da Liga Portugal (ligaportugal.pt).
+   Não precisa de chave. Nota: é a API interna do site — pode mudar sem aviso.
+   Uso: /api/lineups?j=1&home=EST&away=FAM (ids do seed.json) */
 
-const AF_BASE = 'https://v3.football.api-sports.io';
-const LEAGUE = 94;    // Primeira Liga
-const SEASON = 2026;  // época 2026/27
+const LP_BASE = 'https://www.ligaportugal.pt/api';
+const COMP = 'ligaportugalbetclic';
+const SEASON = '20262027'; // época 2026/27
 
 // cache em memória (persiste entre invocações "quentes" da função)
 const cache = new Map();
@@ -37,16 +36,15 @@ function teamIdFromName(name) {
   return null;
 }
 
-async function af(path) {
-  const r = await fetch(`${AF_BASE}${path}`, {
-    headers: { 'x-apisports-key': process.env.API_FOOTBALL_KEY || '' },
+async function lp(path) {
+  const r = await fetch(`${LP_BASE}${path}`, {
+    headers: {
+      'Accept': 'application/json',
+      'User-Agent': 'Mozilla/5.0 (compatible; LigaBetclicPWA/1.0)',
+    },
   });
-  if (!r.ok) throw new Error(`api-football ${r.status}`);
-  const data = await r.json();
-  if (data.errors && Object.keys(data.errors).length) {
-    throw new Error(`api-football: ${JSON.stringify(data.errors)}`);
-  }
-  return data;
+  if (!r.ok) throw new Error(`ligaportugal ${r.status}`);
+  return r.json();
 }
 
 const hit = (key) => cache.get(key);
@@ -61,64 +59,62 @@ exports.handler = async (event) => {
   };
   const ok = (payload) => ({ statusCode: 200, headers, body: JSON.stringify(payload) });
 
-  if (!process.env.API_FOOTBALL_KEY) {
-    return ok({ available: false, reason: 'Onzes indisponíveis (API_FOOTBALL_KEY não configurada).' });
-  }
-
   const q = event.queryStringParameters || {};
-  const { date, home, away } = q;
-  if (!date || !home || !away || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    return { statusCode: 400, headers, body: JSON.stringify({ error: 'faltam parâmetros date/home/away' }) };
+  const { j, home, away } = q;
+  if (!j || !home || !away || !/^\d{1,2}$/.test(j)) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'faltam parâmetros j/home/away' }) };
   }
 
   try {
-    // 1) jogos do dia (1 chamada por dia de jornada, cache 3h)
-    const fxKey = `fx-${date}`;
+    // 1) jogos da jornada (cache 6h)
+    const fxKey = `fx-${j}`;
     let fixtures;
     const fxHit = hit(fxKey);
-    if (fresh(fxHit, 3 * 3600e3)) {
+    if (fresh(fxHit, 6 * 3600e3)) {
       fixtures = fxHit.v;
     } else {
-      const d = await af(`/fixtures?league=${LEAGUE}&season=${SEASON}&date=${date}&timezone=Europe/Lisbon`);
-      fixtures = d.response || [];
+      fixtures = await lp(`/v1/competition/matches?competition=${COMP}&season=${SEASON}&round=${j}`);
+      if (!Array.isArray(fixtures)) throw new Error('resposta inesperada');
       put(fxKey, fixtures);
     }
 
     const fx = fixtures.find(f =>
-      f.teams && teamIdFromName(f.teams.home.name) === home && teamIdFromName(f.teams.away.name) === away
+      teamIdFromName(f.homeTeam && f.homeTeam.name) === home &&
+      teamIdFromName(f.awayTeam && f.awayTeam.name) === away
     );
     if (!fx) return ok({ available: false, reason: 'Jogo não encontrado na fonte de onzes.' });
 
-    // 2) onzes — cache 24h se já os temos, 10 min enquanto não anunciados
-    const luKey = `lu-${fx.fixture.id}`;
+    // 2) detalhes do jogo — cache 24h se já temos onzes, 10 min enquanto não anunciados
+    const luKey = `lu-${j}-${fx.fixtureNumber}`;
     const luHit = hit(luKey);
     if (luHit && fresh(luHit, luHit.v.available ? 24 * 3600e3 : 10 * 60e3)) {
       return ok(luHit.v);
     }
 
-    const d = await af(`/fixtures/lineups?fixture=${fx.fixture.id}`);
-    const resp = d.response || [];
+    const d = await lp(`/v1/match/details?competition=${COMP}&season=${SEASON}&round=${j}&fixture=${fx.fixtureNumber}`);
+    const simp = (parts) => {
+      const xi = (parts || [])
+        .filter(p => p.intervenientTypeId === 1)
+        .map(p => ({ name: p.name, number: p.shirtNumber, captain: !!p.isCaptain }));
+      const coach = ((parts || []).find(p => p.isMainCoach) || {}).name || '';
+      return { xi, coach };
+    };
+    const h = simp(d.homeTeamParticipants);
+    const a = simp(d.awayTeamParticipants);
+
     let payload;
-    if (resp.length < 2 || !(resp[0].startXI || []).length) {
-      payload = { available: false, reason: 'Onzes ainda não anunciados (habitualmente ~40 min antes do jogo).' };
+    if (h.xi.length < 11 || a.xi.length < 11) {
+      payload = { available: false, reason: 'Onzes ainda não anunciados (habitualmente ~1 hora antes do jogo).' };
     } else {
-      const simp = (r) => ({
-        team: (r.team && r.team.name) || '',
-        formation: r.formation || '',
-        coach: (r.coach && r.coach.name) || '',
-        xi: (r.startXI || []).map(x => ({
-          name: x.player && x.player.name,
-          number: x.player && x.player.number,
-          pos: x.player && x.player.pos,
-        })),
-      });
-      const h = resp.find(r => teamIdFromName(r.team && r.team.name) === home) || resp[0];
-      const a = resp.find(r => teamIdFromName(r.team && r.team.name) === away) || resp[1];
-      payload = { available: true, home: simp(h), away: simp(a) };
+      payload = {
+        available: true,
+        home: { team: (d.homeTeam && d.homeTeam.name) || '', formation: '', coach: h.coach, xi: h.xi },
+        away: { team: (d.awayTeam && d.awayTeam.name) || '', formation: '', coach: a.coach, xi: a.xi },
+      };
     }
     put(luKey, payload);
     return ok(payload);
   } catch (e) {
-    return ok({ available: false, reason: /plan/i.test((e && e.message) || '') ? 'Onzes indisponíveis: o plano gratuito da API-Football não cobre a época 2026/27.' : 'Fonte de onzes temporariamente indisponível.' });
+    return ok({ available: false, reason: 'Fonte de onzes temporariamente indisponível.' });
   }
 };
